@@ -31,7 +31,10 @@ public class CommandPatternHW3 {
         // It should have "setCommand" and "pressButton" methods
         // "setCommand" should set the next Command to execute
         // "pressButton" should execute the command
+    	
+    	//Invoker has a list of commands
     	private ArrayList<Command> Commands;
+    	//Invoker has a reference to related printer
     	private Printer printerInstance;
     	public PrinterControlPanel(Printer input){
     		Commands = new ArrayList<Command>();
@@ -47,6 +50,8 @@ public class CommandPatternHW3 {
     
     // You should create PrintCommand, ResetCommand, and PowerOffCommand classes here
     
+    //Print the required doc
+    //Has a Printer and a docName
     public static class PrintCommand implements Command{
     	private Printer PrinterReceiver;
     	private String docName;
@@ -62,6 +67,8 @@ public class CommandPatternHW3 {
 		}    	
     }
     
+    //Reset the printer
+    //Has -A printer
     public static class ResetCommand implements Command{
     	private Printer PrinterReceiver;
     	public ResetCommand(Printer input){
@@ -73,6 +80,8 @@ public class CommandPatternHW3 {
     	}
     }
     
+    //Power off the printer
+    //Has-A printer
     public static class PowerOffCommand implements Command{
     	private Printer PrinterReceiver;
     	
@@ -97,13 +106,17 @@ public class CommandPatternHW3 {
         // Then it shuld use the PrinterControlPanel and each of the three Command classes
         // to print "Assignment.doc", then to reset the printer, then to power off the pringter.
     	Printer a = new Printer();
+    	//initiate invoker -- pass in reference to related printer
     	PrinterControlPanel pannel = new PrinterControlPanel(a);
+    	//initiate commands
     	PrintCommand print = new PrintCommand(a,"Assignment.doc");
     	PowerOffCommand poweroff = new PowerOffCommand(a);
     	ResetCommand reset = new ResetCommand(a);
+    	//Give invoker a list of commands
     	pannel.setCommand(print);
     	pannel.setCommand(reset);
     	pannel.setCommand(poweroff);
+    	//execute them one by one
     	pannel.pressButton();
     	pannel.pressButton();
     	pannel.pressButton();
